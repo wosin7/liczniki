@@ -1,7 +1,7 @@
 var Counter = React.createClass({
     getInitialState: function() {
         return {
-            counter: 0
+            counter: 1
         };
     },
     componentWillMount: function () {
@@ -17,7 +17,16 @@ var Counter = React.createClass({
             counter: this.state.counter - 1
         });
     },
-
+    multi: function() {
+        this.setState({
+            counter: this.state.counter * 2
+        });
+    },
+    divide: function() {
+        this.setState({
+            counter: this.state.counter / 2
+        });
+    },
     render: function(){
         return React.createElement('div', {className: 'container'},
             React.createElement('div', {className:'incr'},
@@ -55,63 +64,6 @@ var Counter = React.createClass({
     }
 });
 
-var Multi = React.createClass({
-    getInitialState: function() {
-        return {
-            counter: 1
-        };
-    },
-    componentWillMount: function () {
-        console.log('Multi willmount')
-    },
-    multi: function() {
-        this.setState({
-            counter: this.state.counter * 2
-        });
-    },
-    divide: function() {
-        this.setState({
-            counter: this.state.counter / 2
-        });
-    },
+var element = React.createElement('div', {}, React.createElement(Counter), React.createElement(Counter), React.createElement(Counter));
 
-    render: function(){
-        return React.createElement('div', {className: 'container'},
-            React.createElement('div', {className:'incr'},
-            React.createElement('span', {}, 'Licznik: ' +this.state.counter),
-			React.createElement('div', {className: 'buttonContainer'},
-                React.createElement('button',{onClick: this.multi}, 'x2'),
-                React.createElement('button',{onClick: this.divide}, '/2')
-            )
-            ),
-        )
-    },
-    componentDidMount: function () {
-        console.log('Multi didmount')
-    },
-    
-    componentWillReceiveProps: function () {
-    console.log('Multi willreciveprops')
-    },
-    
-    shouldComponentUpdate: function (nextProps, nextState) {
-      console.log('Multi shouldcopmonentupdate')
-      return nextState.count === this.state.count
-    },
-    
-    componentWillUpdate: function () {
-      console.log('Multi componentWillupdate')
-    },
-    
-    componentDidUpdate: function () {
-      console.log('Multi componenetdidupdate')
-    },
-    
-    componentWillUnmount: function () {
-      console.log('Multi componentwillunmout')
-    }
-});
-var element = React.createElement(Counter);
-var mlt = React.createElement(Multi);
 ReactDOM.render(element, document.getElementById('app'));
-ReactDOM.render(mlt, document.getElementById('multi'));
